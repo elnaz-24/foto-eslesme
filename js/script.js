@@ -28,11 +28,37 @@ let randomNum = function () {
 /*
 Görev 2: Bu numaraları 1-99 arası(1 ve 99 dahil) sayılardan rastgele 4 çift oluşturacak şekilde üreten bir fonksiyon yazarak, kod bloğundaki array değerini bu fonksiyondan dönen array ile değiştiren kodları yazın
 */
-const fotoNumaralari = [10, 20, 30, 20, 10, 40, 40, 30];
+// تابعی برای تولید آرایه‌ای از 4 جفت اعداد تصادفی بین 1 تا 99
+function generateRandomPairs(count) {
+  let numbers = new Set();
+  let pairs = [];
+
+  while (numbers.size < count * 2) {
+    let randomNumber = Math.floor(Math.random() * 99) + 1; // بین 1 تا 99
+    if (!numbers.has(randomNumber)) {
+      numbers.add(randomNumber);
+      pairs.push(randomNumber);
+      pairs.push(randomNumber); // هر عدد دوبار در آرایه قرار می‌گیرد (جفت)
+    }
+  }
+
+  // آرایه نهایی را تصادفی می‌کنیم
+  pairs.sort(() => Math.random() - 0.5);
+
+  return pairs;
+}
+
+// photoNumbers آرایه‌ای از اعداد تصادفی برای بازی تطبیق
+const fotoNumaralari = generateRandomPairs(4);
+
+
+
+/************************** */
+/*const fotoNumaralari = [10, 20, 30, 20, 10, 40, 40, 30];*/
 
 console.log(fotoNumaralari);
 
-for (fotoNumara of fotoNumaralari) {
+for (let fotoNumara of fotoNumaralari) {
   const yenikart = document.createElement("div");
   yenikart.innerHTML = kartTemplate;
   yenikart.classList.add("kart");
@@ -99,8 +125,8 @@ function kartTiklama(olay) {
     /*
             Görev 1: Kullanıcı 4 kartı da eşleştirdiğinde sayfa ortasında beliren hareketli gif dosyası formatında bir kutlama görseli belirsin ve bu fotoğraf 5 saniye sonra ortadan kaybolsun.
         */
-       
-    if (puan === 4) {
+
+    if (puan === 8) {
       const kutlama = document.createElement("img");
       kutlama.src = "gift/kutlama.gif"; // kutlama.gif dosyanızın yolu burada olmalı
       kutlama.classList.add("kutlama-gorsel");
